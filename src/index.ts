@@ -1,7 +1,6 @@
-import express from 'express';
 import {apiV1} from './routes/api-v1';
+import {app} from './routes/router';
 
-const app = express();
 const port = 3000
 
 app.use('/api/v1', apiV1)
