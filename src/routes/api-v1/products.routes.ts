@@ -1,8 +1,8 @@
-import express from 'express';
 import {ProductsController} from '../../app/controllers/products.controller';
+import {appRouter} from '../router';
 
-export const products = express.Router();
+export const products = appRouter();
 
-const controller = new ProductsController()
 
-products.get('/', controller.index)
+products.resource('/products', new ProductsController)
+
