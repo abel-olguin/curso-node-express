@@ -1,7 +1,7 @@
 import express, {RouterOptions} from 'express';
 import {AppResponseType} from '../app/types';
-import {ResourceControllerContract} from '../app/contracts/resource-controller.contract';
 import {toCamelCase} from '../app/helpers/string.helper';
+import {BaseController} from '../app/controllers/base.controller';
 
 export const app = express()
 
@@ -17,7 +17,7 @@ app.response.sendJson = function ({
 export const appRouter = function (options?: RouterOptions) {
   const router = express.Router(options);
 
-  router.resource = function (path: string, controller: ResourceControllerContract) {
+  router.resource = function (path: string, controller: BaseController) {
     const name = path.replace('/', '')
     const resourceName = toCamelCase(path)
     const routes = {

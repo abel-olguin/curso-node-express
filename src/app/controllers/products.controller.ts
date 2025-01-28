@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
-import {ResourceControllerContract} from '../contracts/resource-controller.contract';
+import {BaseController} from './base.controller';
 
-export class ProductsController implements ResourceControllerContract {
+export class ProductsController extends BaseController {
   index(_: Request, res: Response): void {
     res.sendJson({data: []})
   }
