@@ -1,6 +1,6 @@
 export type AppResponseType = {
   msg?: string,
-  data: object | [],
+  data: object | [] | null,
   status?: number,
   errors?: string[]
 }

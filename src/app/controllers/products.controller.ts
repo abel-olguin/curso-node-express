@@ -8,20 +8,40 @@ export class ProductsController extends BaseController {
     res.sendJson({data: products})
   }
 
-  show(req: Request, res: Response): void {
-    res.sendJson({data: {msg: `Hello show ${req.params['productsKey']}`}})
+  async show(req: Request, res: Response) {
+    const product = await Product.findOne({where: {id: Number(req.params.productsKey)}});
+    res.sendJson({data: product})
   }
 
-  store(_: Request, res: Response): void {
-    res.sendJson({data: {msg: 'Hello store'}})
+  async store(req: Request, res: Response) {
+    const product = new Product();
+    product.name = req.body.name;
+    product.category_id = req.body.category_id
+    product.description = req.body.description
+    product.price = req.body.price
+    await product.save();
+    res.sendJson({data: product})
   }
 
-  update(_: Request, res: Response): void {
-    res.sendJson({data: {msg: 'Hello update'}})
+  async update(req: Request, res: Response) {
+    const product = await Product.findOne({where: {id: Number(req.params.productsKey)}});
+    if (product) {
+      product.name = req.body.name;
+      product.category_id = req.body.category_id
+      product.description = req.body.description
+      product.price = req.body.price
+      await product.save();
+    }
+
+    res.sendJson({data: product})
   }
 
-  delete(_: Request, res: Response): void {
-    res.sendJson({data: {msg: 'Hello delete'}})
+  async delete(req: Request, res: Response) {
+    const product = await Product.findOne({where: {id: Number(req.params.productsKey)}});
+    if (product) {
+      await product.remove();
+    }
+    res.sendJson({data: {msg: 'Ok'}})
   }
 
 }
