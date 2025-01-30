@@ -10,7 +10,10 @@ export const AppDataSource = new DataSource({
   database:    dbName,
   schema:      dbSchema,
   logging:     true,
-  entities:    [],
+  entities:    [
+    'src/app/database/entities/*.entity{.js,.ts}',
+    'dist/app/database/entities/*.entity{.js,.ts}',
+  ],
   subscribers: [],
   migrations:  [],
   cache:       false,
