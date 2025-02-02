@@ -4,7 +4,6 @@ import {AppDataSource} from './app/database/datasource';
 import {port} from './app/config/app';
 import express from 'express';
 
-
 export async function start() {
   await AppDataSource.initialize().then(() => {
     console.log('Database connected');
