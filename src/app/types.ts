@@ -1,4 +1,5 @@
 import {z, ZodIssue} from 'zod';
+import {NextFunction, Request, Response} from 'express';
 
 export type AppResponseType = {
   msg?: string,
@@ -13,3 +14,5 @@ export type ResourceOptionsType = {
     [key: string]: validatorType
   }
 }
+
+export type RequestFunction = (req: Request, res: Response, next: NextFunction) => Promise<void>;

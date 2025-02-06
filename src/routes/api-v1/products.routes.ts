@@ -4,7 +4,6 @@ import {storeProductValidator, updateProductValidator} from './validators/produc
 
 export const products = appRouter();
 
-
 products.resource('/products', new ProductsController, {
   validators: {store: storeProductValidator, update: updateProductValidator}
 })

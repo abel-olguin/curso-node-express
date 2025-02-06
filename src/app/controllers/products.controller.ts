@@ -9,7 +9,8 @@ export class ProductsController extends BaseController {
   }
 
   async show(req: Request, res: Response) {
-    const product = await Product.findOne({where: {id: Number(req.params.productsKey)}});
+    const product = await Product.findOneOrFail({where: {id: Number(req.params.productsKey)}});
+
     res.sendJson({data: product})
   }
 

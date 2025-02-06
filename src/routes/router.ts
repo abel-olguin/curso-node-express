@@ -3,6 +3,7 @@ import {AppResponseType, ResourceOptionsType} from '../app/types';
 import {toCamelCase} from '../app/helpers/string.helper';
 import {BaseController} from '../app/controllers/base.controller';
 import {validate} from './middlewares';
+import {asyncHandler} from '../app/errors/handler';
 
 export const app = express()
 
@@ -34,9 +35,9 @@ export const appRouter = function (options?: RouterOptions) {
         const routeItem = routes[routeName]
         const route = `/${routeItem.path}`
         if (options && options.validators && routeName in options.validators) {
-          this.route(route)[routeItem.method](validate(options.validators[routeName]), controller[routeName])
+          this.route(route)[routeItem.method](validate(options.validators[routeName]), asyncHandler(controller[routeName]))
         } else {
-          this.route(route)[routeItem.method](controller[routeName])
+          this.route(route)[routeItem.method](asyncHandler(controller[routeName]))
         }
       }
     })

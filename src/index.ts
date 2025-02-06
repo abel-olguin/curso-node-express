@@ -3,6 +3,7 @@ import {app} from './routes/router';
 import {AppDataSource} from './app/database/datasource';
 import {port} from './app/config/app';
 import express from 'express';
+import {handleError} from './app/errors/handler';
 
 export async function start() {
   await AppDataSource.initialize().then(() => {
@@ -13,6 +14,8 @@ export async function start() {
 
   app.use(express.json());
   app.use('/api/v1', apiV1)
+
+  app.use(handleError)
 
   app.listen(port, () => {
     console.log(`Server started on http://localhost:${port}`);
