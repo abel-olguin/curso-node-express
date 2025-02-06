@@ -20,4 +20,9 @@ export class Category extends BaseEntity {
 
   @OneToMany(() => Product, (product) => product.category)
   products: Product[];
+
+  toJSON() {
+    const {id, name, slug, products} = this;
+    return {id, name, slug, products};
+  }
 }

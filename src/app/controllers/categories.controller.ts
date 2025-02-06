@@ -1,42 +1,26 @@
 import {Request, Response} from 'express';
 import {BaseController} from './base.controller';
-import {Category} from '../database/entities/category.entity';
+import {CategoryService} from '../services/category.service';
 
 export class CategoriesController extends BaseController {
   async index(_: Request, res: Response) {
-    const categories = await Category.find({take: 10});
-    res.sendJson({data: categories})
+    res.sendJson({data: await CategoryService.findAll()})
   }
 
   async show(req: Request, res: Response) {
-    const category = await Category.findOne({where: {id: Number(req.params.categoriesKey)}});
-    res.sendJson({data: category})
+    res.sendJson({data: await CategoryService.find(Number(req.params.categoriesKey))})
   }
 
   async store(req: Request, res: Response) {
-    const category = new Category();
-    category.name = req.body.name;
-    category.slug = req.body.slug;
-    await category.save();
-    res.sendJson({data: category})
+    res.sendJson({data: await CategoryService.store(res.locals.validated)})
   }
 
   async update(req: Request, res: Response) {
-    const category = await Category.findOne({where: {id: Number(req.params.categoriesKey)}});
-    if (category) {
-      category.name = req.body.name;
-      category.slug = req.body.slug;
-      await category.save();
-    }
-
-    res.sendJson({data: category})
+    res.sendJson({data: await CategoryService.update(Number(req.params.categoriesKey), res.locals.validated)})
   }
 
   async delete(req: Request, res: Response) {
-    const category = await Category.findOne({where: {id: Number(req.params.categoriesKey)}});
-    if (category) {
-      await category.remove();
-    }
+    await CategoryService.delete(Number(req.params.categoriesKey));
     res.sendJson({data: {msg: 'Ok'}})
   }
 

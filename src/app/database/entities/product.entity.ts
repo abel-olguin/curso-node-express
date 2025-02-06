@@ -27,4 +27,9 @@ export class Product extends BaseEntity {
   @ManyToOne(() => Category, category => category.products)
   @JoinColumn({name: 'category_id'})
   category: Relation<Category>;
+
+  toJSON() {
+    const {id, name, description, price, category} = this;
+    return {id, name, description, price, category};
+  }
 }

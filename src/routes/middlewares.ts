@@ -13,7 +13,7 @@ export function validate(validator: validatorType) {
       }
       res.sendJson({data: [], status: 500, msg: 'error'})
     }
-    res.locals.validatior = validated
+    res.locals.validated = validated
     next()
   }
 }

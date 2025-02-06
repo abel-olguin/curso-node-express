@@ -15,4 +15,15 @@ export type ResourceOptionsType = {
   }
 }
 
+export type StoreProductRequestDataType = {
+  name: string,
+  category_id: number,
+  description: string,
+  price: number
+}
+
+export type StoreCategoryRequestDataType = {
+  name: string,
+  slug: string,
+}
 export type RequestFunction = (req: Request, res: Response, next: NextFunction) => Promise<void>;
