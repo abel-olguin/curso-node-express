@@ -3,7 +3,7 @@ import {ResourceControllerContract} from '../../src/app/contracts/resource-contr
 
 declare module 'express-serve-static-core' {
   interface Router {
-    resource(path: string, controller: ResourceControllerContract, options: ResourceOptionsType): void
+    resource(path: string, controller: ResourceControllerContract, options?: ResourceOptionsType): void
   }
 
   interface Response {

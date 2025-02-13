@@ -19,7 +19,7 @@ app.response.sendJson = function ({
 export const appRouter = function (options?: RouterOptions) {
   const router = express.Router(options);
 
-  router.resource = function (path: string, controller: BaseController, options: ResourceOptionsType) {
+  router.resource = function (path: string, controller: BaseController, options?: ResourceOptionsType) {
     const name = path.replace('/', '')
     const resourceName = toCamelCase(path)
     const routes = {
