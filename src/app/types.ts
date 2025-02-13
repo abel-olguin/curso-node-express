@@ -26,4 +26,11 @@ export type StoreCategoryRequestDataType = {
   name: string,
   slug: string,
 }
+
+export type StoreUserRequestDataType = {
+  email: string,
+  password: string,
+  name: string,
+  image?: string
+}
 export type RequestFunction = (req: Request, res: Response, next: NextFunction) => Promise<void>;
