@@ -1,5 +1,9 @@
 import {z} from 'zod';
 import {validatorType} from '../app/types';
+import {NextFunction, Request, Response} from 'express';
+import {BadCredentialsError} from '../app/errors/exceptions';
+import jwt from 'jsonwebtoken';
+import {jwtSecret} from '../app/config/app';
 
 export function validate(validator: validatorType) {
   return async (req: any, res: any, next: any) => {
@@ -16,4 +20,14 @@ export function validate(validator: validatorType) {
     res.locals.validated = validated
     next()
   }
+}
+
+export async function authMiddleware(req: Request, res: Response, next: NextFunction) {
+  const authorization = req?.headers?.authorization || false;
+  if (!authorization) throw new BadCredentialsError()
+  return jwt.verify(authorization.replace('Bearer ', ''), jwtSecret, (err, decoded) => {
+    console.log(decoded)
+    if (err) throw new BadCredentialsError()
+    return next()
+  })
 }

@@ -5,7 +5,9 @@ import {auth} from './auth.routes';
 
 export const apiV1 = appRouter();
 
-apiV1.use(products)
 apiV1.use(categories)
 apiV1.use(auth)
+
+apiV1.use(products)
+
 
