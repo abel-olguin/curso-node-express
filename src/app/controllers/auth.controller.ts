@@ -8,7 +8,12 @@ export class AuthController {
 
   async login(req: Request, res: Response) {
     const {email, password} = req.body;
-    const user = await UserService.login(email, password);
-    res.sendJson({data: user.getJwt()});
+    const tokenData = await UserService.login(res, email, password);
+    res.sendJson({data: tokenData});
+  }
+
+  async refresh(req: Request, res: Response) {
+    const tokenData = await UserService.refresh(req.cookies.refresh);
+    res.sendJson({data: tokenData});
   }
 }

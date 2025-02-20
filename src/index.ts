@@ -3,6 +3,7 @@ import {app} from './routes/router';
 import {AppDataSource} from './app/database/datasource';
 import {port} from './app/config/app';
 import express from 'express';
+import cookieparser from 'cookie-parser';
 import {handleError} from './app/errors/handler';
 
 export async function start() {
@@ -13,6 +14,7 @@ export async function start() {
   })
 
   app.use(express.json());
+  app.use(cookieparser());
   app.use('/api/v1', apiV1)
 
   app.use(handleError)

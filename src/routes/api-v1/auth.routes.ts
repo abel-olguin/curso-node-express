@@ -9,3 +9,4 @@ export const auth = appRouter();
 const authController = new AuthController();
 auth.post('/auth/signup', validate(signUpValidator), asyncHandler(authController.signUp))
 auth.post('/auth/login', validate(authValidator), asyncHandler(authController.login))
+auth.post('/auth/refresh', asyncHandler(authController.refresh))
