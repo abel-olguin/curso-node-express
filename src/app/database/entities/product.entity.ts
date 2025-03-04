@@ -1,8 +1,11 @@
-import {BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation} from 'typeorm';
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, type Relation} from 'typeorm';
 import {Category} from './category.entity';
+import {Base} from './base';
 
 @Entity({name: 'products'})
-export class Product extends BaseEntity {
+export class Product extends Base {
+  searchFields = ['name'];
+
   @PrimaryGeneratedColumn()
   id: number;
 

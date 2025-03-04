@@ -1,10 +1,11 @@
 import {Category} from '../database/entities/category.entity';
 import {StoreCategoryRequestDataType} from '../types';
+import {Base} from '../database/entities/base';
 
 export class CategoryService {
 
-  static async findAll(): Promise<Category[]> {
-    return await Category.find({take: 10});
+  static async findAll(search: string): Promise<Base[]> {
+    return await Category.querySearch(search);
   }
 
   static async find(id: number) {
