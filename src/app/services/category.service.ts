@@ -1,11 +1,16 @@
 import {Category} from '../database/entities/category.entity';
 import {StoreCategoryRequestDataType} from '../types';
-import {Base} from '../database/entities/base';
 
 export class CategoryService {
 
-  static async findAll(search: string): Promise<Base[]> {
-    return await Category.querySearch(search);
+  static async findAll(query: any) {
+    return await Category.queryParams({
+      search:    query.search || '',
+      sortBy:    query.sort || '',
+      direction: query.sortDirection?.toUpperCase() === 'ASC' ? 'ASC' : 'DESC',
+      page:      query.page || 1,
+      pageSize:  query.pageSize || 10
+    });
   }
 
   static async find(id: number) {

@@ -4,8 +4,7 @@ import {CategoryService} from '../services/category.service';
 
 export class CategoriesController extends BaseController {
   async index(req: Request, res: Response) {
-    const search = req.query.search as string;
-    res.sendJson({data: await CategoryService.findAll(search)})
+    res.sendJson({data: await CategoryService.findAll(req.query)})
   }
 
   async show(req: Request, res: Response) {

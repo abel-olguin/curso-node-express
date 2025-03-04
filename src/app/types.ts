@@ -33,4 +33,19 @@ export type StoreUserRequestDataType = {
   name: string,
   image?: string
 }
+
+export type QueryParamsType = {
+  search: string | '',
+  sortBy: string | '',
+  direction: 'ASC' | 'DESC',
+  page: number | 1,
+  pageSize: number | 10
+}
+
+export type PaginationType = {
+  page: number,
+  pageSize: number,
+  total: number,
+  pages: number
+}
 export type RequestFunction = (req: Request, res: Response, next: NextFunction) => Promise<void>;
